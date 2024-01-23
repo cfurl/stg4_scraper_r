@@ -1,6 +1,8 @@
 # change from desktop
 
-library(tidyverse)
+#library(tidyverse)
+library(dplyr)
+library(stringr)
 library(rvest)
 
 # This is the most recent service change notice for RTMA and URMA
@@ -60,7 +62,8 @@ source_path<-paste0("https://nomads.ncep.noaa.gov/pub/data/nccf/com/rtma/prod/rt
 
 # create download destination
 #destination_path<-paste0("C:\\texas_mpe\\de_grib\\wgrib2_precompiled\\wgrib2\\",tail(grib2_available,n=1))
-destination_path<-paste0("C:\\Downloads\\",tail(grib2_available,n=1))
+#destination_path<-paste0("C:\\shiny\\stg4_scraper_r\\output\\",tail(grib2_available,n=1))
+destination_path<-paste0(getwd(), "/output/",tail(grib2_available,n=1))
 
 #download the file  
-download.file (source_path,destination_path,method = "curl")
+download.file (source_path,destination_path,method = "libcurl")
