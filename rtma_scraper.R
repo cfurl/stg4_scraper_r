@@ -67,3 +67,7 @@ destination_path<-paste0(getwd(), "/output/",tail(grib2_available,n=1))
 
 #download the file  
 download.file (source_path,destination_path,method = "libcurl")
+
+# Write your shell file to communicate with the wgrib2 container
+txt<- paste("wgrib2", tail(grib2_available,n=1), "-csv",  str_replace(tail(grib2_available,n=1), ".grb2", ".txt"))
+writeLines(txt,paste0(getwd(),"/output/wgrib2_commands.sh"))

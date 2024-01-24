@@ -1,0 +1,7 @@
+services:
+  
+  some-name:
+    image: cfurl/rtma_scraper_image_r:v1
+    volumes: 
+        - //c/shiny/stg4_scraper_r/output:/home/stg4_scraper_r/output
+    

@@ -1,10 +1,12 @@
+# build your scraper image
 docker build -t rtma_scraper_image_r .
 
+# run the scraper image
 docker run -v //c/shiny/stg4_scraper_r/output:/home/stg4_scraper_r/output rtma_scraper_image_r
 
 
 
-docker-compose.yml
+# docker-compose.yml to run the scaper image with volume mounts on machine
 
 services:
   
@@ -12,3 +14,37 @@ services:
     image: cfurl/rtma_scraper_image_r:v1
     volumes: 
         - //c/shiny/stg4_scraper_r/output:/home/stg4_scraper_r/output
+		
+		
+		
+# pull down homeboys wgrib2 image
+		docker pull sondngyn/wgrib2
+		
+# example of running a container from that image
+docker run -v C:\shiny\docker_grib\:/srv/ -v C:\shiny\docker_grib\:/opt/ sondngyn/wgrib2 run_docker_win.sh
+
+
+# docker compose .yml with the wgrib2 image 
+services:
+  wgrib2:
+    image: sondngyn/wgrib2:latest
+    container_name: wgrib2
+    restart: unless-stopped
+    entrypoint: /bin/bash
+    # Change this command to your bash script filename
+    command: "run_docker_win.sh"
+    volumes: 
+      - C:\shiny\docker_grib\:/srv/
+      - C:\shiny\docker_grib\:/opt/
+
+
+
+
+
+
+
+
+
+
+
+
