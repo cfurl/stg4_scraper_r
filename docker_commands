@@ -1,12 +1,20 @@
+# Scraper part from NCEP
+
 # build your scraper image
+# I have this image up on my account cfurl/rtma_scraper_image_r
+
 docker build -t rtma_scraper_image_r .
 
+
 # run the scraper image
+# start the Daemon, run this in powershell, I think unimportant what folder you're navigated to
+
 docker run -v //c/shiny/stg4_scraper_r/output:/home/stg4_scraper_r/output rtma_scraper_image_r
 
 
 
 # docker-compose.yml to run the scaper image with volume mounts on machine
+# navigate to C:\shiny\stg4_scraper_r> docker-compose up
 
 services:
   
@@ -15,7 +23,7 @@ services:
     volumes: 
         - //c/shiny/stg4_scraper_r/output:/home/stg4_scraper_r/output
 		
-		
+##########################################################################################################		
 		
 # pull down homeboys wgrib2 image
 		docker pull sondngyn/wgrib2
