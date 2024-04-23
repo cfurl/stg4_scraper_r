@@ -37,8 +37,6 @@ services:
   wgrib2:
     image: sondngyn/wgrib2:latest
     container_name: wgrib2
-    restart: unless-stopped
-    entrypoint: /bin/bash
     # Change this command to your bash script filename
     command: "run_docker_win.sh"
     volumes: 
