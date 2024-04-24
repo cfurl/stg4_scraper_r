@@ -1,7 +1,19 @@
 services:
   
-  some-name:
-    image: cfurl/rtma_scraper_image_r:v1
+  scraper:
+    image: cfurl/rtma_scraper_image_r:v2
+    container_name: scraper
+    #first path is where you place .yml and rtma_scraper.R, second path shouldn't change
     volumes: 
-        - //c/shiny/stg4_scraper_r/output:/home/stg4_scraper_r/output
-    
+        - //c/shiny/stg4_scraper_r:/home/stg4_scraper_r
+
+  wgrib2:
+    image: sondngyn/wgrib2:latest
+    container_name: wgrib2
+    command: "wgrib2_commands.sh"
+    depends_on:
+      scraper:
+        condition: service_completed_successfully
+    volumes: 
+      - C:\shiny\stg4_scraper_r\:/srv/
+      - C:\shiny\stg4_scraper_r\:/opt/

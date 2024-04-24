@@ -9,7 +9,7 @@ docker build -t rtma_scraper_image_r .
 # run the scraper image
 # start the Daemon, run this in powershell, I think unimportant what folder you're navigated to
 
-docker run -v //c/shiny/stg4_scraper_r/output:/home/stg4_scraper_r/output rtma_scraper_image_r
+docker run -v //c/shiny/stg4_scraper_r:/home/stg4_scraper_r rtma_scraper_image_r
 
 
 
@@ -19,9 +19,9 @@ docker run -v //c/shiny/stg4_scraper_r/output:/home/stg4_scraper_r/output rtma_s
 services:
   
   some-name:
-    image: cfurl/rtma_scraper_image_r:v1
+    image: cfurl/rtma_scraper_image_r:v2
     volumes: 
-        - //c/shiny/stg4_scraper_r/output:/home/stg4_scraper_r/output
+        - //c/shiny/stg4_scraper_r:/home/stg4_scraper_r
 		
 ##########################################################################################################		
 		
@@ -47,14 +47,16 @@ services:
 #######################################################
 
 # docker compose .yml combining the scraper and wgrib
+# need the .yml and rtma_scraper.R in a folder.  .yml should pull images from repository if not local.
 
 services:
   
   scraper:
-    image: rtma_scrape_play
+    image: cfurl/rtma_scraper_image_r:v2
     container_name: scraper
+    #first path is where you place .yml and rtma_scraper.R, second path shouldn't change
     volumes: 
-        - //c/shiny/scrape_play:/home/scrape_play
+        - //c/shiny/stg4_scraper_r:/home/stg4_scraper_r
 
   wgrib2:
     image: sondngyn/wgrib2:latest
@@ -64,10 +66,8 @@ services:
       scraper:
         condition: service_completed_successfully
     volumes: 
-      - C:\shiny\scrape_play\:/srv/
-      - C:\shiny\scrape_play\:/opt/
-    
-
+      - C:\shiny\stg4_scraper_r\:/srv/
+      - C:\shiny\stg4_scraper_r\:/opt/
 
 
 
