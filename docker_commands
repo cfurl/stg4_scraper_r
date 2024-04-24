@@ -44,7 +44,29 @@ services:
       - C:\shiny\docker_grib\:/opt/
 
 
+#######################################################
 
+# docker compose .yml combining the scraper and wgrib
+
+services:
+  
+  scraper:
+    image: rtma_scrape_play
+    container_name: scraper
+    volumes: 
+        - //c/shiny/scrape_play:/home/scrape_play
+
+  wgrib2:
+    image: sondngyn/wgrib2:latest
+    container_name: wgrib2
+    command: "wgrib2_commands.sh"
+    depends_on:
+      scraper:
+        condition: service_completed_successfully
+    volumes: 
+      - C:\shiny\scrape_play\:/srv/
+      - C:\shiny\scrape_play\:/opt/
+    
 
 
 

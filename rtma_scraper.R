@@ -63,11 +63,11 @@ source_path<-paste0("https://nomads.ncep.noaa.gov/pub/data/nccf/com/rtma/prod/rt
 # create download destination
 #destination_path<-paste0("C:\\texas_mpe\\de_grib\\wgrib2_precompiled\\wgrib2\\",tail(grib2_available,n=1))
 #destination_path<-paste0("C:\\shiny\\stg4_scraper_r\\output\\",tail(grib2_available,n=1))
-destination_path<-paste0(getwd(), "/output/",tail(grib2_available,n=1))
+destination_path<-paste0(getwd(), "/",tail(grib2_available,n=1))
 
 #download the file  
 download.file (source_path,destination_path,method = "libcurl")
 
 # Write your shell file to communicate with the wgrib2 container
 txt<- paste("wgrib2", tail(grib2_available,n=1), "-csv",  str_replace(tail(grib2_available,n=1), ".grb2", ".txt"))
-writeLines(txt,paste0(getwd(),"/output/wgrib2_commands.sh"))
+writeLines(txt,paste0(getwd(),"/wgrib2_commands.sh"))
