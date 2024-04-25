@@ -3,13 +3,13 @@
 # build your scraper image
 # I have this image up on my account cfurl/rtma_scraper_image_r
 
-docker build -t rtma_scraper .
+docker build -t stg4_scraper .
 
 
 # run the scraper image
 # start the Daemon, run this in powershell, I think unimportant what folder you're navigated to
 
-docker run -v //c/shiny/stg4_scraper_r:/home/stg4_scraper_r cfurl/rtma_scraper:v2
+docker run -v //c/shiny/stg4_scraper_r:/home/stg4_scraper_r stg4_scraper:latest
 
 
 
@@ -52,7 +52,7 @@ services:
 services:
   
   scraper:
-    image: cfurl/rtma_scraper:v2
+    image: cfurl/stg4_scraper:v1
     container_name: scraper
     #first path is where you place .yml and rtma_scraper.R, second path shouldn't change
     volumes: 

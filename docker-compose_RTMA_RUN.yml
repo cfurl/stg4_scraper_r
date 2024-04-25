@@ -1,7 +1,7 @@
 services:
   
   scraper:
-    image: cfurl/stg4_scraper:v1
+    image: cfurl/rtma_scraper:v2
     container_name: scraper
     #first path is where you place .yml and rtma_scraper.R, second path shouldn't change
     volumes: 
